@@ -67,7 +67,7 @@
 	<br><br>
 	<div>위중증자 수 : <%= dto.getKorea_danger() %> 명 &nbsp&nbsp 사망자 수 : <%= dto.getKorea_death() %> 명</div>
 	<br><br><br>
-	// for문
+	// for문 해주세요
 	<div><%= dto.getKorea_local() %>지역 확진자 수 : <%= dto.getKorea_local_info() %> 명</div>
 	<br><br>
 	<div>지역 확진자 수 : <%= dto.getKorea_chungnam() %> 명</div>
