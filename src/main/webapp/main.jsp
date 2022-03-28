@@ -45,7 +45,6 @@
 			<li><a href="foreignInfo.jsp">해외 정보</a></li>
 			<li>보건소 정보</li>
 			<li><a href="board.jsp">문의/건의 게시판</a></li>
-			<li>로그인</li>
 		</ul>
 	</div>
 	

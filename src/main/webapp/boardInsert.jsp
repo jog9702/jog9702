@@ -40,20 +40,22 @@
 	  	padding:0;
 	  	display:inline-block;
   	}
-  	form{
-		width:50%
+  	table{
+		width:80%
 		border:1px solid black;
-		margin:50px auto;
-
+		margin:100px auto;
+		border-collapse: separate;
+  		border-spacing: 0 10px;
 	}
-	.board1 {
-
+	th, td {
 	    padding: 10px;
   	}
-  	.board2 {
-
-	    padding-top: 20px;
-	    padding-bottom:20px;
+  	textarea{
+  		width:300px;
+  		height:200px;
+  	}
+  	input{
+  		width:300px;
   	}
 </style>
 </head>
@@ -70,22 +72,47 @@
 	</div>
 	<hr>
 	<%
-		int boardId = Integer.parseInt(request.getParameter("board_id"));
 		BoardInfoDAO boardInfoDAO = new BoardInfoDAO();
-		BoardInfoDTO boardInfo = boardInfoDAO.selectBoardInfo(boardId);
+		List<BoardInfoDTO> boardInfoList = boardInfoDAO.selectBoardList();
 		
 	%>
-	<form class="board1">
-		<div class="board2">
-			<div>
-				<hr>
-				<div>게시글 번호 : <%= boardInfo.getBoardId() %></div>
-				<div>게시글 제목 : <%= boardInfo.getBoardTitle() %></div>
-				<div>게시글 내용 : <%= boardInfo.getBoardDesc() %></div>
-				<div>게시글 작성자 : <%= boardInfo.getBoardUser() %></div>
-				<hr>
-			</div>
-		</div>
+	<form method="post" action="insert.jsp">
+	<table>
+		<tr>
+			<td>
+			제목
+			</td>
+			<td>
+			<input type="text" name="boardTitle">
+			</td>
+		</tr>
+		<tr>
+			<td>
+			내용
+			</td>
+			<td>
+			<textarea name="boardDesc"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			작성자
+			</td>
+			<td>
+			<input type="text" name="boardUser">
+			</td>
+		</tr>
+		<tr>
+			<td>
+			비밀번호
+			</td>
+			<td>
+			<input type="password" name="boardPassword">
+			</td>
+		</tr>
+	</table>
+	<button>등록하기</button>
 	</form>
+	
 </body>
 </html>

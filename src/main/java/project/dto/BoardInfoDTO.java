@@ -8,7 +8,6 @@ public class BoardInfoDTO {
 	private String boardTitle;
 	private String boardDesc;
 	private String boardUser;
-	private String boardComment;
 	private String boardPassword;
 	
 	
@@ -35,12 +34,6 @@ public class BoardInfoDTO {
 	}
 	public void setBoardUser(String boardUser) {
 		this.boardUser = boardUser;
-	}
-	public String getBoardComment() {
-		return boardComment;
-	}
-	public void setBoardComment(String boardComment) {
-		this.boardComment = boardComment;
 	}
 	public String getBoardPassword() {
 		return boardPassword;
