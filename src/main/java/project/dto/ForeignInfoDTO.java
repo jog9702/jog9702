@@ -4,43 +4,59 @@ import java.sql.Date;
 
 public class ForeignInfoDTO {
 	
-	private int foreign_id;
-	private String foreign_info;
-	private String foreign_danger;
-	private String foreign_death;
-	private String foreign_time;
+	private int foreignId;
+	private int foreignInfo;
+	private int foreignDanger;
+	private int foreignDeath;
+	private String foreignLocal;
+	private int foreignLocalInfo;
+	private String foreignTime;
 	
 	
-	public int getForeign_id() {
-		return foreign_id;
+	public int getForeignId() {
+		return foreignId;
 	}
-	public void setForeign_id(int foreign_id) {
-		this.foreign_id = foreign_id;
+	public void setForeignId(int foreignId) {
+		this.foreignId = foreignId;
 	}
-	public String getForeign_info() {
-		return foreign_info;
+	public int getForeignInfo() {
+		return foreignInfo;
 	}
-	public void setForeign_info(String foreign_info) {
-		this.foreign_info = foreign_info;
+	public void setForeignInfo(int foreignInfo) {
+		this.foreignInfo = foreignInfo;
 	}
-	public String getForeign_danger() {
-		return foreign_danger;
+	public int getForeignDanger() {
+		return foreignDanger;
 	}
-	public void setForeign_danger(String foreign_danger) {
-		this.foreign_danger = foreign_danger;
+	public void setForeignDanger(int foreignDanger) {
+		this.foreignDanger = foreignDanger;
 	}
-	public String getForeign_death() {
-		return foreign_death;
+	public int getForeignDeath() {
+		return foreignDeath;
 	}
-	public void setForeign_death(String foreign_death) {
-		this.foreign_death = foreign_death;
+	public void setForeignDeath(int foreignDeath) {
+		this.foreignDeath = foreignDeath;
 	}
-	public String getForeign_time() {
-		return foreign_time;
+	public String getForeignLocal() {
+		return foreignLocal;
 	}
-	public void setForeign_time(String foreign_time) {
-		this.foreign_time = foreign_time;
+	public void setForeignLocal(String foreignLocal) {
+		this.foreignLocal = foreignLocal;
 	}
-
+	public int getForeignLocalInfo() {
+		return foreignLocalInfo;
+	}
+	public void setForeignLocalInfo(int foreignLocalInfo) {
+		this.foreignLocalInfo = foreignLocalInfo;
+	}
+	public String getForeignTime() {
+		return foreignTime;
+	}
+	public void setForeignTime(String foreignTime) {
+		this.foreignTime = foreignTime;
+	}
+	
+	
+	
 	
 }

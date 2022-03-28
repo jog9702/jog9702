@@ -19,9 +19,6 @@
   	a{
   		text-decoration:none;
   	}
-  	#menu{
-  	
-  	}
   	ul{
 	  	list-style:none;
 	  	height:40px;
@@ -47,7 +44,7 @@
 			<li><a href="koreaInfo.jsp">국내 정보</a></li>
 			<li><a href="foreignInfo.jsp">해외 정보</a></li>
 			<li>보건소 정보</li>
-			<li>문의/건의 게시판</li>
+			<li><a href="board.jsp">문의/건의 게시판</a></li>
 			<li>로그인</li>
 		</ul>
 	</div>
@@ -63,8 +60,8 @@
 	
 	<hr>
 	<br><br><br><br><br><br>
-	<div><h2>일일 확진자 수 : <%= dto.getKorea_info() %> 명</h2></div>
+	<div><h2>일일 확진자 수 : <%= dto.getKoreaInfo() %> 명</h2></div>
 	<br><br>
-	<div>위중증자 수 : <%= dto.getKorea_danger() %> 명 &nbsp&nbsp 사망자 수 : <%= dto.getKorea_death() %> 명</div>
+	<div>위중증자 수 : <%= dto.getKoreaDanger() %> 명 &nbsp&nbsp 사망자 수 : <%= dto.getKoreaDeath() %> 명</div>
 </body>
 </html>

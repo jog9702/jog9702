@@ -4,21 +4,21 @@ import java.sql.Date;
 
 public class MapInfoDTO {
 	
-	private int map_id;
-	private String map_info;
+	private int mapId;
+	private String mapInfo;
 	
 	
-	public int getMap_id() {
-		return map_id;
+	public int getmapId() {
+		return mapId;
 	}
-	public void setMap_id(int map_id) {
-		this.map_id = map_id;
+	public void setmapId(int mapId) {
+		this.mapId = mapId;
 	}
 	public String getMpa_info() {
-		return map_info;
+		return mapInfo;
 	}
 	public void setMpa_info(String mpa_info) {
-		this.map_info = mpa_info;
+		this.mapInfo = mpa_info;
 	}
 	
 }

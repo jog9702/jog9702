@@ -4,49 +4,49 @@ import java.sql.Date;
 
 public class BoardInfoDTO {
 	
-	private int board_id;
-	private String board_title;
-	private String board_desc;
-	private String board_user;
-	private String board_comment;
-	private String board_password;
+	private int boardId;
+	private String boardTitle;
+	private String boardDesc;
+	private String boardUser;
+	private String boardComment;
+	private String boardPassword;
 	
 	
-	public int getBoard_id() {
-		return board_id;
+	public int getBoardId() {
+		return boardId;
 	}
-	public void setBoard_id(int board_id) {
-		this.board_id = board_id;
+	public void setBoardId(int boardId) {
+		this.boardId = boardId;
 	}
-	public String getBoard_title() {
-		return board_title;
+	public String getBoardTitle() {
+		return boardTitle;
 	}
-	public void setBoard_title(String board_title) {
-		this.board_title = board_title;
+	public void setBoardTitle(String boardTitle) {
+		this.boardTitle = boardTitle;
 	}
-	public String getBoard_desc() {
-		return board_desc;
+	public String getBoardDesc() {
+		return boardDesc;
 	}
-	public void setBoard_desc(String board_desc) {
-		this.board_desc = board_desc;
+	public void setBoardDesc(String boardDesc) {
+		this.boardDesc = boardDesc;
 	}
-	public String getBoard_user() {
-		return board_user;
+	public String getBoardUser() {
+		return boardUser;
 	}
-	public void setBoard_user(String board_user) {
-		this.board_user = board_user;
+	public void setBoardUser(String boardUser) {
+		this.boardUser = boardUser;
 	}
-	public String getBoard_comment() {
-		return board_comment;
+	public String getBoardComment() {
+		return boardComment;
 	}
-	public void setBoard_comment(String board_comment) {
-		this.board_comment = board_comment;
+	public void setBoardComment(String boardComment) {
+		this.boardComment = boardComment;
 	}
-	public String getBoard_password() {
-		return board_password;
+	public String getBoardPassword() {
+		return boardPassword;
 	}
-	public void setBoard_password(String board_password) {
-		this.board_password = board_password;
+	public void setBoardPassword(String boardPassword) {
+		this.boardPassword = boardPassword;
 	}
 	
 	

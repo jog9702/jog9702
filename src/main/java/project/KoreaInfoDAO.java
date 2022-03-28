@@ -7,12 +7,13 @@ import project.dto.ForeignInfoDTO;
 import project.dto.MapInfoDTO;
 
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,35 +71,39 @@ public class KoreaInfoDAO {
 	
 	public List<KoreaInfoDTO> selectKoreaInfoList(){
 		List<KoreaInfoDTO> list = new ArrayList<KoreaInfoDTO>();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
+		Date date = new Date();
+		String now = dateFormat.format(date);
 		
 		try {
 			con = dataFactory.getConnection();
 			
 			String query = "";
 			query += "select * ";
-			query += "from korea_info";
+			query += "from korea_info where korea_time = ?";
 			System.out.println(query);
+			pstmt = new LoggableStatement(con, query);
+			pstmt.setString(1, now);
 			
-			pstmt = con.prepareStatement(query);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
-				int korea_id = rs.getInt("korea_id");
-				String korea_info = rs.getString("korea_info");
-				String korea_danger = rs.getString("korea_danger");
-				String korea_death = rs.getString("korea_death");
-				String korea_seoul = rs.getString("korea_seoul");
-				String korea_chungnam = rs.getString("korea_chungnam");
-				String korea_time = rs.getString("korea_time");
+				int koreaId = rs.getInt("korea_id");
+				int koreaInfo = rs.getInt("korea_info");
+				int koreaDanger = rs.getInt("korea_danger");
+				int koreaDeath = rs.getInt("korea_death");
+				String koreaLocal = rs.getString("korea_local");
+				int koreaLocalInfo = rs.getInt("korea_local_info");
+				String koreaTime = rs.getString("korea_time");
 				
 				
 				KoreaInfoDTO dto = new KoreaInfoDTO();
-				dto.setKorea_id(korea_id);
-				dto.setKorea_info(korea_info);
-				dto.setKorea_danger(korea_danger);
-				dto.setKorea_death(korea_death);
-				dto.setKorea_seoul(korea_seoul);
-				dto.setKorea_chungnam(korea_chungnam);
-				dto.setKorea_time(korea_time);
+				dto.setKoreaId(koreaId);
+				dto.setKoreaInfo(koreaInfo);
+				dto.setKoreaDanger(koreaDanger);
+				dto.setKoreaDeath(koreaDeath);
+				dto.setKoreaLocal(koreaLocal);
+				dto.setKoreaLocalInfo(koreaLocalInfo);
+				dto.setKoreaTime(koreaTime);
 				
 				list.add(dto);
 			}

@@ -19,9 +19,6 @@
   	a{
   		text-decoration:none;
   	}
-  	#menu{
-  	
-  	}
   	ul{
 	  	list-style:none;
 	  	height:40px;
@@ -47,7 +44,7 @@
 			<li><a href="koreaInfo.jsp">국내 정보</a></li>
 			<li><a href="foreignInfo.jsp">해외 정보</a></li>
 			<li>보건소 정보</li>
-			<li>문의/건의 게시판</li>
+			<li><a href="board.jsp">문의/건의 게시판</a></li>
 			<li>로그인</li>
 		</ul>
 	</div>
@@ -56,32 +53,22 @@
 		ForeignInfoDAO foreignInfoDAO = new ForeignInfoDAO();
 		List<ForeignInfoDTO> foreignInfoList = (List<ForeignInfoDTO>) foreignInfoDAO.selectForeignInfoList();
 		
-		int i = foreignInfoList.size();
 		ForeignInfoDTO dto = (ForeignInfoDTO) foreignInfoList.get(0);
 		
 	%>
 	<hr>
 	<br><br><br><br><br><br>
-	<div><h2>미국 확진자 수 : <%= dto.getForeign_info() %> 명</h2></div>
-	<br><br>
-	<div>위중증자 수 : <%= dto.getForeign_death() %> 명 &nbsp&nbsp 사망자 수 : <%= dto.getForeign_death() %> 명</div>
-	<br><br><br>
-	
 	<%
-		dto = (ForeignInfoDTO) foreignInfoList.get(i-2);
+		for(int i=0; i<foreignInfoList.size(); i++){
+			dto = (ForeignInfoDTO) foreignInfoList.get(i);
+			
 	%>
-	<div><h2>중국 확진자 수 : <%= dto.getForeign_info() %> 명</h2></div>
+	<div><h2><%= dto.getForeignLocal() %>확진자 수 : <%= dto.getForeignLocalInfo() %> 명</h2></div>
 	<br><br>
-	<div>위중증자 수 : <%= dto.getForeign_death() %> 명 &nbsp&nbsp 사망자 수 : <%= dto.getForeign_death() %> 명</div>
+	<div>위중증자 수 : <%= dto.getForeignDanger() %> 명 &nbsp&nbsp 사망자 수 : <%= dto.getForeignDeath() %> 명</div>
 	<br><br><br>
-	
 	<%
-		dto = (ForeignInfoDTO) foreignInfoList.get(i-1);
+		}
 	%>
-	<div><h2>일본 확진자 수 : <%= dto.getForeign_info() %> 명</h2></div>
-	<br><br>
-	<div>위중증자 수 : <%= dto.getForeign_death() %> 명 &nbsp&nbsp 사망자 수 : <%= dto.getForeign_death() %> 명</div>
-	<br><br><br>
-
 </body>
 </html>

@@ -4,56 +4,56 @@ import java.sql.Date;
 
 public class KoreaInfoDTO {
 
-	private int korea_id;
-	private String korea_info;
-	private String korea_danger;
-	private String korea_death;
-	private String korea_seoul;
-	private String korea_chungnam;
-	private String korea_time;
+	private int koreaId;
+	private int koreaInfo;
+	private int koreaDanger;
+	private int koreaDeath;
+	private String koreaLocal;
+	private int koreaLocalInfo;
+	private String koreaTime;
 	
 	
-	public int getKorea_id() {
-		return korea_id;
+	public int getKoreaId() {
+		return koreaId;
 	}
-	public void setKorea_id(int korea_id) {
-		this.korea_id = korea_id;
+	public void setKoreaId(int koreaId) {
+		this.koreaId = koreaId;
 	}
-	public String getKorea_info() {
-		return korea_info;
+	public int getKoreaInfo() {
+		return koreaInfo;
 	}
-	public void setKorea_info(String korea_info) {
-		this.korea_info = korea_info;
+	public void setKoreaInfo(int koreaInfo) {
+		this.koreaInfo = koreaInfo;
 	}
-	public String getKorea_danger() {
-		return korea_danger;
+	public int getKoreaDanger() {
+		return koreaDanger;
 	}
-	public void setKorea_danger(String korea_danger) {
-		this.korea_danger = korea_danger;
+	public void setKoreaDanger(int koreaDanger) {
+		this.koreaDanger = koreaDanger;
 	}
-	public String getKorea_death() {
-		return korea_death;
+	public int getKoreaDeath() {
+		return koreaDeath;
 	}
-	public void setKorea_death(String korea_death) {
-		this.korea_death = korea_death;
+	public void setKoreaDeath(int koreaDeath) {
+		this.koreaDeath = koreaDeath;
 	}
-	public String getKorea_seoul() {
-		return korea_seoul;
+	public String getKoreaLocal() {
+		return koreaLocal;
 	}
-	public void setKorea_seoul(String korea_seoul) {
-		this.korea_seoul = korea_seoul;
+	public void setKoreaLocal(String koreaLocal) {
+		this.koreaLocal = koreaLocal;
 	}
-	public String getKorea_chungnam() {
-		return korea_chungnam;
+	public int getKoreaLocalInfo() {
+		return koreaLocalInfo;
 	}
-	public void setKorea_chungnam(String korea_chungnam) {
-		this.korea_chungnam = korea_chungnam;
+	public void setKoreaLocalInfo(int koreaLocalInfo) {
+		this.koreaLocalInfo = koreaLocalInfo;
 	}
-	public String getKorea_time() {
-		return korea_time;
+	public String getKoreaTime() {
+		return koreaTime;
 	}
-	public void setKorea_time(String korea_time) {
-		this.korea_time = korea_time;
+	public void setKoreaTime(String koreaTime) {
+		this.koreaTime = koreaTime;
 	}
 	
 	

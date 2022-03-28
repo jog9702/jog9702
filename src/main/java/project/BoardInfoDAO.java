@@ -3,6 +3,7 @@ package project;
 import project.dto.KoreaInfoDTO;
 import project.dto.ForeignInfoDTO;
 import project.dto.MapInfoDTO;
+import project.dto.BoardInfoDTO;
 
 import java.sql.Connection;
 import java.util.Date;
@@ -20,8 +21,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-public class ForeignInfoDAO {
-	
+public class BoardInfoDAO {
+
 	private String driver = "oracle.jdbc.driver.OracleDriver";
 	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	private String id = "scott";
@@ -33,7 +34,7 @@ public class ForeignInfoDAO {
 	private DataSource dataFactory;
 	
 	
-	public ForeignInfoDAO() {
+	public BoardInfoDAO() {
 		try {
 
 			Context ctx = new InitialContext();
@@ -68,45 +69,36 @@ public class ForeignInfoDAO {
 	}	
 	
 	
-	public List<ForeignInfoDTO> selectForeignInfoList(){
-		List<ForeignInfoDTO> list = new ArrayList<ForeignInfoDTO>();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
-		Date date = new Date();
-		String now = dateFormat.format(date);
-
-//		String now = (String) new Date(0);
-		
+	public List<BoardInfoDTO> selectBoardInfoList(){
+		List<BoardInfoDTO> list = new ArrayList<BoardInfoDTO>();
 		
 		try {
 			con = dataFactory.getConnection();
-//			int now = list.size();
+			System.out.println("커넥션풀 성공");
 			
 			String query = "";
-			query += "select * ";
-			query += "from foreign_info where foreign_time = ?";
+			query += "SELECT * ";
+			query += " FROM board";
 			System.out.println(query);
-			pstmt = new LoggableStatement(con, query);
-			pstmt.setString(1, now);
-
+			
+			pstmt = con.prepareStatement(query);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
-				int foreignId = rs.getInt("foreign_id");
-				int foreignInfo = rs.getInt("foreign_info");
-				int foreignDanger = rs.getInt("foreign_danger");
-				int foreignDeath = rs.getInt("foreign_death");
-				String foreignLocal = rs.getString("foreign_local");
-				int foreignLocalInfo = rs.getInt("foreign_local_info");
-				String foreignTime = rs.getString("foreign_time");
+				int boarId = rs.getInt("board_id");
+				String boardTitle = rs.getString("board_title");
+				String boardDesc = rs.getString("board_desc");
+				String boardUser = rs.getString("board_user");
+				String boardComment = rs.getString("board_comment");
+				String boardPassword = rs.getString("board_password");
 				
 				
-				ForeignInfoDTO dto = new ForeignInfoDTO();
-				dto.setForeignId(foreignId);
-				dto.setForeignInfo(foreignInfo);
-				dto.setForeignDanger(foreignDanger);
-				dto.setForeignDeath(foreignDeath);
-				dto.setForeignLocal(foreignLocal);
-				dto.setForeignLocalInfo(foreignLocalInfo);
-				dto.setForeignTime(foreignTime);
+				BoardInfoDTO dto = new BoardInfoDTO();
+				dto.setBoardId(boarId);
+				dto.setBoardTitle(boardTitle);
+				dto.setBoardDesc(boardDesc);;
+				dto.setBoardUser(boardUser);
+				dto.setBoardComment(boardComment);
+				dto.setBoardPassword(boardPassword);
 				
 				list.add(dto);
 			}
