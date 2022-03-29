@@ -1,12 +1,9 @@
-<%@page import="project.dto.BoardInfoDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     import="project.KoreaInfoDAO"
     import="project.dto.KoreaInfoDTO"
     import="project.ForeignInfoDAO"
     import="project.dto.ForeignInfoDTO"
-    import="project.MapInfoDAO"
-    import="project.dto.MapInfoDTO"
     import="project.BoardInfoDAO"
     import="project.dto.BoardInfoDTO"
     import="java.util.*"
@@ -42,20 +39,22 @@
 	  	padding:0;
 	  	display:inline-block;
   	}
-  	form{
-		width:50%
+  	table{
+		width:80%
 		border:1px solid black;
-		margin:50px auto;
-
+		margin:100px auto;
+		border-collapse: separate;
+  		border-spacing: 0 10px;
 	}
-	.board1 {
-
+	th, td {
 	    padding: 10px;
   	}
-  	.board2 {
-
-	    padding-top: 20px;
-	    padding-bottom:20px;
+  	textarea{
+  		width:300px;
+  		height:200px;
+  	}
+  	input{
+  		width:300px;
   	}
 </style>
 </head>
@@ -72,27 +71,45 @@
 	</div>
 	<hr>
 	<%
-		int searchBoardId = Integer.parseInt(request.getParameter("board_id"));
+		int boardId = Integer.parseInt(request.getParameter("boardId"));
+		String boardTitle = request.getParameter("boardTitle");
+		String boardDesc = request.getParameter("boardDesc");
+		String boardUser = request.getParameter("boardUser");
+		
 		BoardInfoDAO boardInfoDAO = new BoardInfoDAO();
-		BoardInfoDTO boardInfo = boardInfoDAO.selectBoardInfo(searchBoardId);
+		List<BoardInfoDTO> boardInfoList = boardInfoDAO.selectBoardList();
+		
 	%>
-	<form method="post" action="boardUpdate.jsp" class="board1">
-		<div class="board2">
-			<div>
-				<hr>
-				<div>게시글 번호 : <%= boardInfo.getBoardId() %></div><br>
-				<div>게시글 제목 : <%= boardInfo.getBoardTitle() %></div><br>
-				<div>게시글 내용 : <%= boardInfo.getBoardDesc() %></div><br>
-				<div>게시글 작성자 : <%= boardInfo.getBoardUser() %></div><br>
-				<button>수정</button>&nbsp
-				<button type="button" onclick="location.href='boardDelete.jsp?board_id=<%=searchBoardId%>'">삭제</button>
-				<input type="hidden" name="boardId" value="<%= boardInfo.getBoardId() %>">
-				<input type="hidden" name="boardTitle" value="<%= boardInfo.getBoardTitle() %>">
-				<input type="hidden" name="boardDesc" value="<%= boardInfo.getBoardDesc() %>">
-				<input type="hidden" name="boardUser" value="<%= boardInfo.getBoardUser() %>">
-				<hr>
-			</div>
-		</div>
+	<form method="post" action="boardUpdateResult.jsp">
+	<table>
+		<tr>
+			<td>
+			제목
+			</td>
+			<td>
+			<input type="text" name="boardTitle" value="<%= boardTitle %>">
+			</td>
+		</tr>
+		<tr>
+			<td>
+			내용
+			</td>
+			<td>
+			<textarea name="boardDesc"><%= boardDesc %></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			작성자
+			</td>
+			<td>
+			<input type="text" name="boardUser" value="<%= boardUser %>">
+			</td>
+		</tr>
+	</table>
+	<button>수정하기</button>
+	<input type="hidden" name="boardId" value="<%= boardId %>">
 	</form>
+	
 </body>
 </html>

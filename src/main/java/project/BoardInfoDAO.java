@@ -87,6 +87,7 @@ public class BoardInfoDAO {
 				String boardTitle = rs.getString("board_title");
 				String boardDesc = rs.getString("board_desc");
 				String boardUser = rs.getString("board_user");
+				String boardTime = rs.getString("board_time");
 				String boardPassword = rs.getString("board_password");
 				
 				
@@ -95,6 +96,7 @@ public class BoardInfoDAO {
 				dto.setBoardTitle(boardTitle);
 				dto.setBoardDesc(boardDesc);;
 				dto.setBoardUser(boardUser);
+				dto.setBoardTime(boardTime);
 				dto.setBoardPassword(boardPassword);
 				
 				list.add(dto);
@@ -116,7 +118,7 @@ public class BoardInfoDAO {
 		return list;
 	}
 	
-	public BoardInfoDTO selectBoardInfo(int boardId){
+	public BoardInfoDTO selectBoardInfo(int searchBoardId){
 		BoardInfoDTO dto = new BoardInfoDTO();
 		
 		try {
@@ -127,22 +129,24 @@ public class BoardInfoDAO {
 			query += " FROM board_info where board_id = ? ";
 			System.out.println(query);
 			pstmt = new LoggableStatement(con, query);
-			pstmt.setInt(1, boardId);
+			pstmt.setInt(1, searchBoardId);
 			
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) {
-				int boarId = rs.getInt("board_id");
+				int boardId = rs.getInt("board_id");
 				String boardTitle = rs.getString("board_title");
 				String boardDesc = rs.getString("board_desc");
 				String boardUser = rs.getString("board_user");
+				String boardTime = rs.getString("board_time");
 				String boardPassword = rs.getString("board_password");
 				
 				
 
-				dto.setBoardId(boarId);
+				dto.setBoardId(boardId);
 				dto.setBoardTitle(boardTitle);
 				dto.setBoardDesc(boardDesc);;
 				dto.setBoardUser(boardUser);
+				dto.setBoardTime(boardTime);
 				dto.setBoardPassword(boardPassword);
 				
 			}
@@ -168,8 +172,8 @@ public class BoardInfoDAO {
 		try {
 			con = dataFactory.getConnection();
 
-			String query = " INSERT INTO board_info (board_id, board_title, board_desc, board_user, board_password)";
-			query +=       " VALUES (board_info_seq.nextval, ?, ?, ?, ?)";
+			String query = " INSERT INTO board_info (board_id, board_title, board_desc, board_user, board_time, board_password)";
+			query +=       " VALUES (board_info_seq.nextval, ?, ?, ?, sysdate, ?)";
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, dto.getBoardTitle());
 			pstmt.setString(2, dto.getBoardDesc());
@@ -189,9 +193,70 @@ public class BoardInfoDAO {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
-		}
-		
+		}	
 	}
 	
+	
+	public void boardDelete (int searchBoardId) {
+		try {
+			con = dataFactory.getConnection();
+
+			String query = " DELETE FROM board_info ";
+			query +=       " WHERE board_id = ?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, searchBoardId);
+			pstmt.executeQuery();
+
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				
+				if (con != null) con.close(); 
+				if (pstmt != null) pstmt.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+	}
+	
+	public void boardUpdate (BoardInfoDTO dto) {
+		
+		try {
+			con = dataFactory.getConnection();
+
+			String query = " update board_info ";
+			query +=       " set";
+			query +=       " board_title = ?";
+			query +=       " ,board_desc = ?";
+			query +=       " ,board_user = ?";
+			query +=       " ,board_time = sysdate";
+			query +=       " where board_id = ?";
+
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, dto.getBoardTitle());
+			pstmt.setString(2, dto.getBoardDesc());
+			pstmt.setString(3, dto.getBoardUser());
+			pstmt.setInt(4, dto.getBoardId());
+			
+			
+			int result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				
+				if (con != null) con.close(); 
+				if (pstmt != null) pstmt.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+	}
 }

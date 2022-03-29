@@ -1,15 +1,18 @@
+<%@page import="project.dto.BoardInfoDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     import="project.KoreaInfoDAO"
     import="project.dto.KoreaInfoDTO"
     import="project.ForeignInfoDAO"
     import="project.dto.ForeignInfoDTO"
+    import="project.MapInfoDAO"
+    import="project.dto.MapInfoDTO"
     import="java.util.*"
     %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="EUC-KR">
 <title>위드코로나</title>
 <style>
 	body{
@@ -18,6 +21,9 @@
 	}
   	a{
   		text-decoration:none;
+  	}
+  	#menu{
+  	
   	}
   	ul{
 	  	list-style:none;
@@ -34,6 +40,24 @@
 	  	padding:0;
 	  	display:inline-block;
   	}
+  	form{
+		width:50%
+		border:1px solid black;
+		margin:50px auto;
+
+	}
+	table{
+		width:50%
+		border:1px solid black;
+		margin:100px auto;
+		border-collapse: separate;
+  		border-spacing: 0 10px;
+	}
+	th, td {
+	    border-top: 1px solid #444444;
+	    border-bottom: 1px solid #444444;
+	    padding: 10px;
+ 	}
 </style>
 </head>
 <body>
@@ -47,27 +71,32 @@
 			<li><a href="board.jsp">문의/건의 게시판</a></li>
 		</ul>
 	</div>
-	
-	<%
-		ForeignInfoDAO foreignInfoDAO = new ForeignInfoDAO();
-		List<ForeignInfoDTO> foreignInfoList = (List<ForeignInfoDTO>) foreignInfoDAO.selectForeignInfoList();
-		
-		ForeignInfoDTO dto = (ForeignInfoDTO) foreignInfoList.get(0);
-		
-	%>
 	<hr>
-	<br><br><br><br><br><br>
 	<%
-		for(int i=0; i<foreignInfoList.size(); i++){
-			dto = (ForeignInfoDTO) foreignInfoList.get(i);
-			
+		String searchMapLocal = request.getParameter("mapLocal");
+		MapInfoDAO mapInfoDAO = new MapInfoDAO();
+		List<MapInfoDTO> mapInfoList = mapInfoDAO.selectMapInfo(searchMapLocal);
 	%>
-	<div><h2><%= dto.getForeignLocal() %>확진자 수 : <%= dto.getForeignLocalInfo() %> 명</h2></div>
-	<br><br>
-	<div>위중증자 수 : <%= dto.getForeignDanger() %> 명 &nbsp&nbsp 사망자 수 : <%= dto.getForeignDeath() %> 명</div>
-	<br><br><br>
+	<table>
+		<tr>
+			<td>지역 번호</td>
+			<td>지역 이름</td> 
+			<td>보건소 위치</td>
+			<td>전화번호</td>
+		</tr>
+	<%
+		for(int i=0; i<mapInfoList.size(); i++){
+			MapInfoDTO dto = (MapInfoDTO) mapInfoList.get(i);
+	%>
+		<tr>
+			<td><%= dto.getMapId() %></td>
+			<td><%= dto.getMapLocal() %></td> 
+			<td><%= dto.getMaplocalInfo() %></td>
+			<td><%= dto.getMapTel() %></td>
+		</tr>
 	<%
 		}
 	%>
+	</table>
 </body>
 </html>

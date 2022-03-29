@@ -8,6 +8,15 @@ public class BoardInfoDTO {
 	private String boardTitle;
 	private String boardDesc;
 	private String boardUser;
+	private String boardTime;
+	
+	
+	public String getBoardTime() {
+		return boardTime;
+	}
+	public void setBoardTime(String boardTime) {
+		this.boardTime = boardTime;
+	}
 	private String boardPassword;
 	
 	

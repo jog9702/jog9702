@@ -5,6 +5,8 @@
     import="project.dto.KoreaInfoDTO"
     import="project.ForeignInfoDAO"
     import="project.dto.ForeignInfoDTO"
+    import="project.MapInfoDAO"
+    import="project.dto.MapInfoDTO"
     import="project.BoardInfoDAO"
     import="project.dto.BoardInfoDTO"
     import="java.util.*"
@@ -61,7 +63,7 @@
 		<ul>
 			<li><a href="koreaInfo.jsp">국내 정보</a></li>
 			<li><a href="foreignInfo.jsp">해외 정보</a></li>
-			<li>보건소 정보</li>
+			<li><a href="map.jsp">보건소 정보</a></li>
 			<li><a href="board.jsp">문의/건의 게시판</a></li>
 		</ul>
 	</div>
@@ -75,8 +77,9 @@
 	<table>
 		<tr>
 			<td>게시글 번호</td>
-			<td>게시글 이름</td> 
-			<td>게시글 작성자</td>
+			<td>게시글 이름</td>
+			<td>작성자</td>
+			<td>작성 시간</td>
 		</tr>
 	<%
 		for(int i=0; i<boardInfoList.size(); i++){
@@ -87,6 +90,7 @@
 			<td><%= dto.getBoardId() %></td>
 			<td><%= dto.getBoardTitle() %></td> 
 			<td><%= dto.getBoardUser() %></td>
+			<td><%= dto.getBoardTime() %></td>
 		</tr>
 	<%
 		}

@@ -43,7 +43,7 @@
 		<ul>
 			<li><a href="koreaInfo.jsp">국내 정보</a></li>
 			<li><a href="foreignInfo.jsp">해외 정보</a></li>
-			<li>보건소 정보</li>
+			<li><a href="map.jsp">보건소 정보</a></li>
 			<li><a href="board.jsp">문의/건의 게시판</a></li>
 		</ul>
 	</div>

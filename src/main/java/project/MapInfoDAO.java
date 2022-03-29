@@ -1,11 +1,19 @@
 package project;
 
+import project.dto.KoreaInfoDTO;
+import project.dto.ForeignInfoDTO;
+import project.dto.MapInfoDTO;
+import project.dto.BoardInfoDTO;
+
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,11 +21,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import project.dto.QuestionDTO;
+public class MapInfoDAO {
 
-
-public class QuestionDAO {
-	
 	private String driver = "oracle.jdbc.driver.OracleDriver";
 	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	private String id = "scott";
@@ -28,7 +33,8 @@ public class QuestionDAO {
 	private Connection con;
 	private DataSource dataFactory;
 	
-	public QuestionDAO() {
+	
+	public MapInfoDAO() {
 		try {
 
 			Context ctx = new InitialContext();
@@ -40,12 +46,10 @@ public class QuestionDAO {
 		}
 	}
 	
-	
 	private void connDB() {
 		try {
 			
 			Class.forName(driver);
-			System.out.println("Oracle 드라이버 로딩 성공");
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -53,53 +57,44 @@ public class QuestionDAO {
 		
 		try {
 			con = DriverManager.getConnection(url, id, pw);
-			System.out.println("Connection 성공");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
 		try {
 			stmt = con.createStatement();
-			System.out.println("Statement 생성 성공");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
+	}	
+
 	
-	
-	public List<QuestionDTO> selectQuestionList(int search_id){
-		List<QuestionDTO> list = new ArrayList<QuestionDTO>();
+	public List<MapInfoDTO> selectMapInfo(String searchMapLocal){
+		List<MapInfoDTO> list = new ArrayList<MapInfoDTO>();
 		
 		try {
 			con = dataFactory.getConnection();
-			System.out.println("커넥션풀 성공");
 			
 			String query = "";
 			query += "SELECT * ";
-			query += " FROM tb_question where survey_id = ?";
+			query += " FROM map_info where map_local = ?";
 			System.out.println(query);
 			pstmt = new LoggableStatement(con, query);
-			pstmt.setInt(1, search_id);
+			pstmt.setString(1, searchMapLocal);
 			
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
-				int question_id = rs.getInt("question_id");
-				int survey_id = rs.getInt("survey_id");
-				String title = rs.getString("title");
-				String desc = rs.getString("desc");
-				String type = rs.getString("type");
-				String order = rs.getString("order");
-				String mandatory = rs.getString("mandatory");
+				int mapId = rs.getInt("map_id");
+				String mapLocal = rs.getString("map_local");
+				String mapLocalInfo = rs.getString("map_local_info");
+				String mapTel = rs.getString("map_tel");
 				
 				
-				QuestionDTO dto = new QuestionDTO();
-				dto.setQuestion_id(question_id);
-				dto.setSurvey_id(survey_id);
-				dto.setTitle(title);
-				dto.setDesc(desc);
-				dto.setType(type);
-				dto.setOrder(order);
-				dto.setMandatory(mandatory);
+				MapInfoDTO dto = new MapInfoDTO();
+				dto.setMapId(mapId);
+				dto.setMapLocal(mapLocal);
+				dto.setMaplocalInfo(mapLocalInfo);
+				dto.setMapTel(mapTel);
 				
 				list.add(dto);
 			}
@@ -117,9 +112,8 @@ public class QuestionDAO {
 			e.printStackTrace();
 		}
 		
-//		list = new ArrayList<QuestionDTO>();
-		
 		return list;
 	}
+	
 	
 }
